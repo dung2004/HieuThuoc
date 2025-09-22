@@ -1,0 +1,152 @@
+﻿HieuThuoc
+├─ src/
+   ├─ HieuThuoc.Domain/            # Entities, Enums, DTOs
+   │    └─ Entities/
+   │         Medicine.cs
+   │         Batch.cs
+   │         Packaging.cs
+   │    └─ DTOs/
+   
+   ├─ HieuThuoc.Data/              # Repositories, sql
+
+   │    └─ Repositories/
+   │    └─ sql/                    
+ 
+   ├─ HieuThuoc.Services/          # Business logic (FEFO, allocation, reports)
+   │    └─ Interfaces/
+   │    └─ Implementations/
+   │    └─ DTOs/                       # service layer DTOs
+ 
+   ├─ HieuThuoc.UI/                 # WinForms app + Presenters
+   │    └─ Forms/
+   │         Form1.cs                 # Main form
+   │    └─ Presenters/
+   │    └─ Views/Interfaces/
+   │    └─ Program.cs                  # DI bootstrap & Application.Run
+   │    └─ app.config               # chứa cấu hình kết nối DB (connection string)
+ 
+   └─ HieuThuoc.Common/             # Utilities, exceptions, constants, mapping, Helpers
+        └─ MappingProfiles.cs (AutoMapper) #file này chưa có gì
+        └─ Exceptions/
+        └─ Helpers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+HieuThuoc
+├─ src/
+   ├─ HieuThuoc.Domain/            # Entities, Enums, DTOs
+   │    └─ Entities/
+   │         Account.cs
+   │         Batch.cs
+   │         FileName.cs
+   │         Medicine.cs
+   │         Packaging.cs
+   │         Role.cs
+   │    └─ DTOs/
+   │         AccountDto.cs
+   │         BatchDto.cs           (new)
+   │         DashboardStatsDto.cs
+   │         RevenuePointDto.cs
+
+   ├─ HieuThuoc.Data/              # Repositories, sql
+   │    └─ Repositories/
+   │         IAccountRepository.cs
+   │         AccountRepository.cs
+   │         IMedicineRepository.cs
+   │         MedicineRepository.cs
+   │         IPackagingRepository.cs
+   │         PackagingRepository.cs
+   │         IRoleRepository.cs
+   │         RoleRepository.cs
+   │         IBatchRepository.cs   (new)
+   │         BatchRepository.cs    (new)
+   │    └─ sql/                    # create_tables.sql, seed.sql, versioned scripts
+
+   ├─ HieuThuoc.Services/          # Business logic (FEFO, allocation, reports)
+   │    └─ Interfaces/
+   │         IAuthService.cs
+   │         IBatchService.cs      (modify/ensure exists)
+   │         IMedicineService.cs
+   │         IPackagingService.cs
+   │         IReportService.cs
+   │         IUserManagementService.cs
+   │         IUserService.cs
+   │    └─ Implementations/
+   │         AuthService.cs
+   │         BatchService.cs       (modify/implement CRUD)
+   │         MedicineService.cs
+   │         PackagingService.cs
+   │         ReportService.cs
+   │         UserManagementService.cs
+   │         UserService.cs
+   │    └─ DTOs/                   # service layer DTOs (if any)
+
+   ├─ HieuThuoc.UI/                 # WinForms app + Presenters
+   │    └─ Forms/
+   │         FormMainMenu.cs
+   │         FormLogin.cs
+   │         FormCreateUser.cs
+   │         FormBatchManagement.cs   (modify to implement IBatchView)
+   │         FormMedicineManagement.cs
+   │         FormPackagingManagement.cs
+   │         FormPurchase.cs
+   │         FormReports.cs
+   │         FormSale.cs
+   │         FormSupplierManagement.cs
+   │         FormUserManagement.cs
+   │    └─ Presenters/
+   │         CreateUserPresenter.cs
+   │         LoginPresenter.cs
+   │         MainMenuPresenter.cs
+   │         MedicinePresenter.cs
+   │         PackagingPresenter.cs
+   │         UserManagementPresenter.cs
+   │         BatchManagementPresenter.cs   (new)
+   │    └─ Views/
+   │         ICreateUserView.cs
+   │         ILoginView.cs
+   │         IMainMenuView.cs
+   │         IMedicineView.cs
+   │         IPackagingView.cs
+   │         IUserManagementView.cs
+   │         IBatchView.cs                    (new)
+   │    └─ Program.cs
+   │    └─ app.config
+
+   └─ HieuThuoc.Common/             # Utilities, exceptions, constants, mapping, Helpers
+        └─ CurrentUser.cs
+        └─ MappingProfiles.cs
+        └─ Exceptions/
+        └─ Helpers/
+        └─ ThemeColor.cs

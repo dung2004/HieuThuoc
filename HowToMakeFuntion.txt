@@ -1,0 +1,235 @@
+Tổng kết ngắn
+
+Bắt đầu từ folder Data\Repositories: tạo repository IBatchRepository + BatchRepository.
+
+Tiếp theo làm Services (IBatchService + BatchService) để đóng gói business & validation.
+
+Rồi UI: tạo IBatchView, BatchManagementPresenter, sửa FormBatchManagement implement view.
+
+Cuối cùng: wire DI (Program.cs) và test chức năng (load, select, add, update, delete).
+###################################################################
+###################################################################
+###################################################################
+###################################################################
+###################################################################
+Bước 1 — Data layer: tạo Repository (Data\Repositories)
+
+Mục tiêu: repository là nơi chứa truy vấn SQL. Tạo interface và implementation cho Batch.
+
+Tạo file Data\Repositories\IBatchRepository.cs
+
+Methods gợi ý:
+
+IEnumerable<Batch> GetAll();
+
+IEnumerable<Batch> GetAllByMedicineId(int medicineId);
+
+Batch GetById(int batchId);
+
+int Insert(Batch batch); — trả về BatchId mới
+
+void Update(Batch batch);
+
+void Delete(int batchId);
+
+Tạo file Data\Repositories\BatchRepository.cs (implement ADO.NET or Dapper)
+
+Chức năng:
+
+Thực thi SQL SELECT/INSERT/UPDATE/DELETE.
+
+Dùng parameterized queries (SqlParameter) để tránh SQL injection.
+
+GetAll() trả batches kèm theo Medicine info (join) nếu cần.
+
+Insert sử dụng SCOPE_IDENTITY() để lấy ID.
+
+Lưu ý concurrency: không cần lock ở read; update/delete phải kiểm tra tồn (QuantityPills) theo business (sẽ kiểm ở service).
+
+Sau khi xong: bạn có repository sẵn để service gọi.
+
+Bước 2 — Domain / DTOs: chuẩn hóa object (Domain\DTOs)
+
+Tạo file Domain\DTOs\BatchDto.cs
+
+Trường gợi ý: BatchId, MedicineId, MedicineName, BatchCode, ExpiryDate, QuantityPills, PurchasePrice.
+
+DTO giúp presenter/view không tiếp xúc entity thô (optional nhưng tốt).
+
+Nếu chưa có Medicine list DTO, đảm bảo có MedicineDto hoặc Medicine entity để đổ combobox medicine.
+
+Bước 3 — Service layer: mở rộng IBatchService / BatchService (Services\Interfaces & Services\Implementations)
+
+Mở file Services\Interfaces\IBatchService.cs và thêm phương thức:
+
+IEnumerable<BatchDto> GetAllBatches();
+
+BatchDto GetBatchById(int id);
+
+int CreateBatch(BatchDto dto);
+
+void UpdateBatch(BatchDto dto);
+
+void DeleteBatch(int id);
+
+Sửa/Implement Services\Implementations\BatchService.cs:
+
+Gọi IBatchRepository để thực hiện CRUD.
+
+Chuyển entity <-> dto mapping (manual hoặc AutoMapper nếu có).
+
+Thực hiện validation: ExpiryDate > today, QuantityPills >= 0, PurchasePrice >= 0.
+
+Trả lỗi (throw) nếu invalid — Presenter bắt và show message.
+
+Bước 4 — UI: tạo View interface cho Batch (UI\Views)
+
+Tạo file UI\Views\IBatchView.cs (nội dung)
+
+Property để presenter đọc các giá trị từ form:
+
+int SelectedBatchId { get; } (hoặc int?)
+
+int SelectedMedicineId { get; }
+
+string BatchCode { get; }
+
+DateTime ExpiryDate { get; }
+
+int QuantityPills { get; }
+
+decimal PurchasePrice { get; }
+
+Methods:
+
+void BindBatchList(IEnumerable<BatchDto> batches); — dùng để gán DataGridView.DataSource
+
+void ShowBatch(BatchDto batch); — fill textboxes
+
+void ShowError(string msg);
+
+void ShowMessage(string msg);
+
+void SetPresenter(BatchManagementPresenter presenter);
+
+Bước 5 — UI: Presenter cho Batch (UI\Presenters)
+
+Tạo file UI\Presenters\BatchManagementPresenter.cs
+
+Constructor: nhận IBatchView view, IBatchService batchService, IMedicineService medicineService (để load combo medicine).
+
+Methods:
+
+void LoadBatches() — gọi batchService.GetAllBatches(), rồi view.BindBatchList(...).
+
+void OnRowSelected(int batchId) — lấy batch GetBatchById -> view.ShowBatch(...).
+
+void AddBatch() — lấy dữ liệu từ view properties, validate, call batchService.CreateBatch(dto), then LoadBatches().
+
+void UpdateBatch() — validate, call batchService.UpdateBatch(dto), then LoadBatches().
+
+void DeleteBatch() — confirm, call batchService.DeleteBatch(id), then LoadBatches().
+
+void Refresh() — wrapper for LoadBatches.
+
+Presenter xử lý UI logic (confirmation popup, parsing errors) and catch exceptions from service to call view.ShowError.
+
+Bước 6 — UI Form: chỉnh sửa FormBatchManagement
+
+Implement IBatchView trong FormBatchManagement.cs.
+
+Trong Form_Load (hoặc khi form hiển thị), gọi _presenter.LoadBatches() và load cbMedicine via medicineService (có thể presenter làm).
+
+Event handlers:
+
+dgvBatches.SelectionChanged -> đọc selected row BatchId -> gọi _presenter.OnRowSelected(batchId)
+
+btnAdd.Click -> _presenter.AddBatch()
+
+btnUpdate.Click -> _presenter.UpdateBatch()
+
+btnDelete.Click -> _presenter.DeleteBatch()
+
+btnRefresh.Click -> _presenter.Refresh()
+
+BindBatchList: set dgvBatches.DataSource = list (use BindingList or DataTable). Set AutoGenerateColumns or define columns manually; ensure BatchId column hidden if desired.
+
+ShowBatch: set textbox/controls values with batchDto fields.
+
+Validation UI: disable Update/Delete if no row selected; ensure numeric controls validate user input.
+
+Bước 7 — DI: đăng ký services & presenter trong Program.cs
+
+Đăng ký repository & service:
+
+services.AddSingleton<IBatchRepository>(_ => new BatchRepository(connString));
+
+services.AddSingleton<IBatchService, BatchService>();
+
+Đăng ký presenter & form factory tương tự pattern bạn đang dùng:
+
+services.AddTransient<FormBatchManagement>(sp => { var form = new FormBatchManagement(); var view = form as IBatchView; var presenter = new BatchManagementPresenter(view, sp.GetRequiredService<IBatchService>(), sp.GetRequiredService<IMedicineService>()); return form; });
+
+Khi FormMainMenu mở child form, resolve via Program.ServiceProvider.GetRequiredService<FormBatchManagement>() (as you did for login).
+
+Bước 8 — Logging, Error handling, UX polish
+
+Bắt exception ở presenter và service; view.ShowError(ex.Message).
+
+Log lỗi & actions (Serilog) ở service layer (insert log for Create/Update/Delete).
+
+Sau CRUD thành công: show success message and reselect newly inserted/updated row.
+
+Bước 9 — Concurrency & business rules
+
+Nếu Update ảnh hưởng tới kho (QuantityPills giảm), kiểm tra không làm âm số; service nên validate and throw.
+
+Nếu có chức năng bán đang dùng lô đó, cân nhắc khoá ở cấp transaction khi doing complex operations (sale allocation handled in SaleService, not Batch management).
+
+Bước 10 — Test & verify
+
+Chạy form, thử Load, chọn dòng, confirm textboxes hiển thị đúng.
+
+Thêm thử batch mới, cập nhật, xóa; kiểm tra DB.
+
+Kiểm thử invalid inputs (expiry trước ngày hiện tại, negative qty, bad price).
+
+Phần B — Các file bạn cần tạo mới (tóm tắt)
+
+Data\Repositories\IBatchRepository.cs
+
+Data\Repositories\BatchRepository.cs
+
+Domain\DTOs\BatchDto.cs
+
+Services\Interfaces\IBatchService.cs (mở rộng nếu đã có)
+
+Services\Implementations\BatchService.cs (sửa để implement các method mới)
+
+UI\Views\IBatchView.cs
+
+UI\Presenters\BatchManagementPresenter.cs
+
+Sửa UI\Forms\FormBatchManagement.cs để : Form, IBatchView và implement methods/events
+
+Sửa Program.cs để đăng ký DI (form factory + repo + service)
+
+Phần C — Gợi ý thứ tự triển khai (thực tế, 1 buổi làm)
+
+Tạo DTO BatchDto (5 phút).
+
+Tạo IBatchRepository (5 phút).
+
+Implement BatchRepository (20–40 phút) — test query SELECT * FROM Batch.
+
+Mở/sửa IBatchService (5 phút) và BatchService (20–30 phút) đơn giản map repo->dto.
+
+Tạo IBatchView (5 phút) và BatchManagementPresenter (15 phút).
+
+Thay đổi FormBatchManagement để implement IBatchView, wiring events, và test Load (20–40 phút).
+
+Đăng ký DI & resolve form từ FormMainMenu (10 phút).
+
+Viết Update/Add/Delete logic trong presenter + service (30–60 phút).
+
+Test + fix UI binding + message (30 phút).
