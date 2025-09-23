@@ -26,6 +26,8 @@ namespace HieuThuoc.UI.Forms
         private Form activateForm;
         private bool isClick = true;
 
+
+
         //constructor
         public FormMainMenu()
         {
@@ -42,6 +44,9 @@ namespace HieuThuoc.UI.Forms
 
         private void FormMainMenu_Load(object sender, EventArgs e)
         {
+            hieuThuocDropdownMenu1.IsMainMenu = true;
+            hieuThuocDropdownMenu1.PrimaryColor = Color.Black;
+            hieuThuocDropdownMenu1.MenuItemTextColor = Color.Azure;
             UpdateAuthButtons();
             var roleId = CurrentUser.RoleId;
 
@@ -148,6 +153,7 @@ namespace HieuThuoc.UI.Forms
             btnUserMana.Visible = isAdmin; // chỉ admin
 
             // CRUD trên các form quản lý: Manager/Admin được, Staff chỉ read-only (form xử lý bên trong)
+            btnChooseReport.Visible = isManager || isAdmin || isStaff;
             btnDashBoard.Visible = isManager || isAdmin || isStaff;
             btnPurchase.Visible = isManager || isAdmin || isStaff;
             btnPackagingMana.Visible = isManager || isAdmin;
@@ -187,7 +193,9 @@ namespace HieuThuoc.UI.Forms
                     currentButton = (Button)btnSender;
                     currentButton.BackColor = color;
                     currentButton.ForeColor = Color.White;
-                    currentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    currentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 
+                        11.5F, System.Drawing.FontStyle.Regular, 
+                        System.Drawing.GraphicsUnit.Point, ((byte)(0)));
                     panelTitleBar.BackColor = color;
                     panelLogo.BackColor = ThemeColor.ChangeColorBrightness(color, -0.3);
                     ThemeColor.PrimaryColor = color;
@@ -408,6 +416,45 @@ namespace HieuThuoc.UI.Forms
         private void btnDashBoard_Click(object sender, EventArgs e)
         {
             OpenChildForm(new Forms.FormDashBoard(), sender);
+        }
+
+        private void btnChooseReport_Click(object sender, EventArgs e)
+        {
+            hieuThuocDropdownMenu1.Show(btnChooseReport, btnChooseReport.Width + 3, 0);
+        }
+
+        private void batchToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormReport("accounts"), btnChooseReport);
+        }
+        private void accountToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormReport("batch"), btnChooseReport);
+        }
+        private void supplierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormReport("sale"), btnChooseReport);
+        }
+        private void purchaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormReport("purchase"), btnChooseReport);
+        }
+
+        private void saleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormReport("roles"), btnChooseReport);
+        }
+        private void medicineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormReport("medicine"), btnChooseReport);
+        }
+        private void packageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormReport("packaging"), btnChooseReport);
+        }
+        private void roleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(new Forms.FormReport("supplier"), btnChooseReport);
         }
     }
 }

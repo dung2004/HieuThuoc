@@ -143,6 +143,16 @@
     <Compile Include="Domain\Entities\Packaging.cs" />
     <Compile Include="Domain\Entities\Role.cs" />
     <Compile Include="Domain\Entities\Supplier.cs" />
+    <Compile Include="HieuThuocDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HieuThuocDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="HieuThuocDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HieuThuocDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Services\DTOs\PurchaseDtos.cs" />
     <Compile Include="Services\DTOs\SaleDtos.cs" />
     <Compile Include="Services\Implementations\BatchService.cs" />
@@ -170,6 +180,12 @@
     </Compile>
     <Compile Include="UI\Forms\FormBatchManagement.Designer.cs">
       <DependentUpon>FormBatchManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\FormChoseReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\FormChoseReport.Designer.cs">
+      <DependentUpon>FormChoseReport.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\FormDashBoard.cs">
       <SubType>Form</SubType>
@@ -218,6 +234,11 @@
     </Compile>
     <Compile Include="UI\Forms\FormUserManagement.Designer.cs">
       <DependentUpon>FormUserManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\MenuColorTable.cs" />
+    <Compile Include="UI\Forms\MenuRenderer.cs" />
+    <Compile Include="UI\Forms\HieuThuocDropdownMenu.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Presenters\BatchPresenter.cs" />
     <Compile Include="UI\Presenters\CreateUserPresenter.cs" />
@@ -270,6 +291,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\ThemeColor.cs" />
     <Content Include="Resources\Medicine\null.jpg" />
+    <Content Include="script.sql" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -284,7 +306,40 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="UI\Forms\1600, 850.txt" />
-    <EmbeddedResource Include="UI\Forms\ReportBatch.rdlc" />
+    <EmbeddedResource Include="UI\Forms\FormChoseReport.resx">
+      <DependentUpon>FormChoseReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Reports\ReportPackaging.rdlc" />
+    <EmbeddedResource Include="UI\Reports\ReportAccounts.rdlc" />
+    <EmbeddedResource Include="UI\Reports\ReportBatch.rdlc" />
+    <EmbeddedResource Include="UI\Reports\ReportMedicine.rdlc" />
+    <EmbeddedResource Include="UI\Reports\ReportPurchase.rdlc" />
+    <EmbeddedResource Include="UI\Reports\ReportRoles.rdlc" />
+    <EmbeddedResource Include="UI\Reports\ReportSale.rdlc" />
+    <EmbeddedResource Include="UI\Reports\ReportSupplier.rdlc" />
+    <None Include="HieuThuocDataSet.xsc">
+      <DependentUpon>HieuThuocDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HieuThuocDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HieuThuocDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="HieuThuocDataSet.xss">
+      <DependentUpon>HieuThuocDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HieuThuocDataSet1.xsc">
+      <DependentUpon>HieuThuocDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="HieuThuocDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HieuThuocDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="HieuThuocDataSet1.xss">
+      <DependentUpon>HieuThuocDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="README.md" />
     <None Include="Resources\logo_store.png" />
     <None Include="Resources\dashboard.png" />
     <Content Include="Resources\ImageFile\admin.jpg" />

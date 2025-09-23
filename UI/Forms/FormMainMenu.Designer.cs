@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelMenu = new System.Windows.Forms.Panel();
             this.btnLogin = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
@@ -40,6 +41,7 @@
             this.buttonManagement = new System.Windows.Forms.Button();
             this.btnSale = new System.Windows.Forms.Button();
             this.btnPurchase = new System.Windows.Forms.Button();
+            this.btnChooseReport = new System.Windows.Forms.Button();
             this.btnDashBoard = new System.Windows.Forms.Button();
             this.panelLogo = new System.Windows.Forms.Panel();
             this.labelUserName = new System.Windows.Forms.Label();
@@ -52,6 +54,15 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.panelDesktopPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.hieuThuocDropdownMenu1 = new HieuThuoc.UI.Forms.HieuThuocDropdownMenu(this.components);
+            this.batchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.accountToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.medicineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.packageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.supplierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.roleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelMenu.SuspendLayout();
             this.panelManagement.SuspendLayout();
             this.panelLogo.SuspendLayout();
@@ -59,6 +70,7 @@
             this.panelTitleBar.SuspendLayout();
             this.panelDesktopPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.hieuThuocDropdownMenu1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMenu
@@ -71,6 +83,7 @@
             this.panelMenu.Controls.Add(this.buttonManagement);
             this.panelMenu.Controls.Add(this.btnSale);
             this.panelMenu.Controls.Add(this.btnPurchase);
+            this.panelMenu.Controls.Add(this.btnChooseReport);
             this.panelMenu.Controls.Add(this.btnDashBoard);
             this.panelMenu.Controls.Add(this.panelLogo);
             this.panelMenu.Dock = System.Windows.Forms.DockStyle.Left;
@@ -87,7 +100,7 @@
             this.btnLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnLogin.Image = global::HieuThuoc.Properties.Resources.login;
-            this.btnLogin.Location = new System.Drawing.Point(0, 629);
+            this.btnLogin.Location = new System.Drawing.Point(0, 689);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnLogin.Size = new System.Drawing.Size(259, 60);
@@ -105,7 +118,7 @@
             this.btnLogout.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnLogout.Image = global::HieuThuoc.Properties.Resources.logout;
-            this.btnLogout.Location = new System.Drawing.Point(0, 689);
+            this.btnLogout.Location = new System.Drawing.Point(0, 749);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnLogout.Size = new System.Drawing.Size(259, 60);
@@ -125,7 +138,7 @@
             this.panelManagement.Controls.Add(this.btnSupplierMana);
             this.panelManagement.Controls.Add(this.btnUserMana);
             this.panelManagement.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelManagement.Location = new System.Drawing.Point(0, 320);
+            this.panelManagement.Location = new System.Drawing.Point(0, 380);
             this.panelManagement.Name = "panelManagement";
             this.panelManagement.Size = new System.Drawing.Size(259, 309);
             this.panelManagement.TabIndex = 13;
@@ -238,7 +251,7 @@
             this.buttonManagement.ForeColor = System.Drawing.Color.Gainsboro;
             this.buttonManagement.Image = global::HieuThuoc.Properties.Resources.management;
             this.buttonManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonManagement.Location = new System.Drawing.Point(0, 260);
+            this.buttonManagement.Location = new System.Drawing.Point(0, 320);
             this.buttonManagement.Name = "buttonManagement";
             this.buttonManagement.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.buttonManagement.Size = new System.Drawing.Size(259, 60);
@@ -257,7 +270,7 @@
             this.btnSale.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnSale.Image = global::HieuThuoc.Properties.Resources.sale;
             this.btnSale.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSale.Location = new System.Drawing.Point(0, 200);
+            this.btnSale.Location = new System.Drawing.Point(0, 260);
             this.btnSale.Name = "btnSale";
             this.btnSale.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnSale.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -277,7 +290,7 @@
             this.btnPurchase.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnPurchase.Image = global::HieuThuoc.Properties.Resources.bar_chart;
             this.btnPurchase.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPurchase.Location = new System.Drawing.Point(0, 140);
+            this.btnPurchase.Location = new System.Drawing.Point(0, 200);
             this.btnPurchase.Name = "btnPurchase";
             this.btnPurchase.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
             this.btnPurchase.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -287,6 +300,26 @@
             this.btnPurchase.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPurchase.UseVisualStyleBackColor = true;
             this.btnPurchase.Click += new System.EventHandler(this.btnPurchase_Click);
+            // 
+            // btnChooseReport
+            // 
+            this.btnChooseReport.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnChooseReport.FlatAppearance.BorderSize = 0;
+            this.btnChooseReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnChooseReport.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnChooseReport.ForeColor = System.Drawing.Color.Gainsboro;
+            this.btnChooseReport.Image = global::HieuThuoc.Properties.Resources.sale;
+            this.btnChooseReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnChooseReport.Location = new System.Drawing.Point(0, 140);
+            this.btnChooseReport.Name = "btnChooseReport";
+            this.btnChooseReport.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.btnChooseReport.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnChooseReport.Size = new System.Drawing.Size(259, 60);
+            this.btnChooseReport.TabIndex = 14;
+            this.btnChooseReport.Text = "  Choose Report";
+            this.btnChooseReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnChooseReport.UseVisualStyleBackColor = true;
+            this.btnChooseReport.Click += new System.EventHandler(this.btnChooseReport_Click);
             // 
             // btnDashBoard
             // 
@@ -442,6 +475,81 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // hieuThuocDropdownMenu1
+            // 
+            this.hieuThuocDropdownMenu1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.hieuThuocDropdownMenu1.IsMainMenu = false;
+            this.hieuThuocDropdownMenu1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.batchToolStripMenuItem,
+            this.accountToolStripMenuItem,
+            this.medicineToolStripMenuItem,
+            this.packageToolStripMenuItem,
+            this.purchaseToolStripMenuItem,
+            this.saleToolStripMenuItem,
+            this.supplierToolStripMenuItem,
+            this.roleToolStripMenuItem});
+            this.hieuThuocDropdownMenu1.MenuItemHeight = 25;
+            this.hieuThuocDropdownMenu1.MenuItemTextColor = System.Drawing.Color.Empty;
+            this.hieuThuocDropdownMenu1.Name = "hieuThuocDropdownMenu1";
+            this.hieuThuocDropdownMenu1.PrimaryColor = System.Drawing.Color.Empty;
+            this.hieuThuocDropdownMenu1.Size = new System.Drawing.Size(211, 224);
+            // 
+            // batchToolStripMenuItem
+            // 
+            this.batchToolStripMenuItem.Name = "batchToolStripMenuItem";
+            this.batchToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.batchToolStripMenuItem.Text = "Accounts";
+            this.batchToolStripMenuItem.Click += new System.EventHandler(this.batchToolStripMenuItem_Click);
+            // 
+            // accountToolStripMenuItem
+            // 
+            this.accountToolStripMenuItem.Name = "accountToolStripMenuItem";
+            this.accountToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.accountToolStripMenuItem.Text = "Batch";
+            this.accountToolStripMenuItem.Click += new System.EventHandler(this.accountToolStripMenuItem_Click);
+            // 
+            // medicineToolStripMenuItem
+            // 
+            this.medicineToolStripMenuItem.Name = "medicineToolStripMenuItem";
+            this.medicineToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.medicineToolStripMenuItem.Text = "Medicine";
+            this.medicineToolStripMenuItem.Click += new System.EventHandler(this.medicineToolStripMenuItem_Click);
+            // 
+            // packageToolStripMenuItem
+            // 
+            this.packageToolStripMenuItem.Name = "packageToolStripMenuItem";
+            this.packageToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.packageToolStripMenuItem.Text = "Packaging";
+            this.packageToolStripMenuItem.Click += new System.EventHandler(this.packageToolStripMenuItem_Click);
+            // 
+            // purchaseToolStripMenuItem
+            // 
+            this.purchaseToolStripMenuItem.Name = "purchaseToolStripMenuItem";
+            this.purchaseToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.purchaseToolStripMenuItem.Text = "Purchase";
+            this.purchaseToolStripMenuItem.Click += new System.EventHandler(this.purchaseToolStripMenuItem_Click);
+            // 
+            // saleToolStripMenuItem
+            // 
+            this.saleToolStripMenuItem.Name = "saleToolStripMenuItem";
+            this.saleToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.saleToolStripMenuItem.Text = "Roles";
+            this.saleToolStripMenuItem.Click += new System.EventHandler(this.saleToolStripMenuItem_Click);
+            // 
+            // supplierToolStripMenuItem
+            // 
+            this.supplierToolStripMenuItem.Name = "supplierToolStripMenuItem";
+            this.supplierToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.supplierToolStripMenuItem.Text = "Sale";
+            this.supplierToolStripMenuItem.Click += new System.EventHandler(this.supplierToolStripMenuItem_Click);
+            // 
+            // roleToolStripMenuItem
+            // 
+            this.roleToolStripMenuItem.Name = "roleToolStripMenuItem";
+            this.roleToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.roleToolStripMenuItem.Text = "Supplier";
+            this.roleToolStripMenuItem.Click += new System.EventHandler(this.roleToolStripMenuItem_Click);
+            // 
             // FormMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -464,6 +572,7 @@
             this.panelTitleBar.PerformLayout();
             this.panelDesktopPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.hieuThuocDropdownMenu1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -494,6 +603,16 @@
         private System.Windows.Forms.Label labelUserName;
         private System.Windows.Forms.Button btnDashBoard;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button btnChooseReport;
+        private HieuThuocDropdownMenu hieuThuocDropdownMenu1;
+        private System.Windows.Forms.ToolStripMenuItem batchToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem accountToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem medicineToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem packageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem purchaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem supplierToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem roleToolStripMenuItem;
     }
 }
 
